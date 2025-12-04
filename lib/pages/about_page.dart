@@ -15,15 +15,15 @@ class AboutPage extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            // Logo ou image de la marque
+           
             CircleAvatar(
               radius: 70,
-              backgroundImage: const AssetImage("assets/img/avatar1.png"),
+              backgroundImage: const AssetImage("assets/img/tesst.jpg"),
               backgroundColor: Colors.transparent,
             ),
             const SizedBox(height: 24),
 
-            // Nom de la boutique
+            
             const Text(
               "LUXE FRAGRANCES",
               style: TextStyle(
@@ -43,7 +43,7 @@ class AboutPage extends StatelessWidget {
             ),
             const SizedBox(height: 30),
 
-            // Description
+           
             Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
@@ -63,7 +63,7 @@ class AboutPage extends StatelessWidget {
             ),
             const SizedBox(height: 30),
 
-            // Contact & Location
+            
             const Card(
               elevation: 3,
               child: Padding(
@@ -94,11 +94,7 @@ class AboutPage extends StatelessWidget {
             const SizedBox(height: 40),
 
             
-            Text(
-              "© 2025 LUXE FRAGRANCES - All rights reserved",
-              style: TextStyle(color: Colors.grey[600], fontSize: 12),
-            ),
-            const SizedBox(height: 20),
+            
           ],
         ),
       ),

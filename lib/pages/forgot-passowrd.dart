@@ -13,10 +13,13 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+  // récup l'email saisi
   final emailController = TextEditingController();
   bool isLoading = false;
+  // Clé pour valider le formulaire
   final _formKey = GlobalKey<FormState>();
 
+  // ENVOYER LE LIEN DE RÉINITIALISATION 
   resetPassword() async {
     showDialog(
         context: context,
@@ -28,10 +31,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           );
         });
 
-    try {
+    try { //Envoie l'email de réinitialisation via Firebase
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: emailController.text);
-      if (!mounted) return;
+      if (!mounted) return; // Ferme le loader
       showSnackBar(context, "Done - Please check ur email");
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, "ERROR :  ${e.code} ");
@@ -39,7 +42,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
     if (!mounted) return;
 
-    Navigator.pushReplacement(
+    Navigator.pushReplacement( // Redirige vers la page de connexion
       context,
       MaterialPageRoute(builder: (context) => const Login()),
     );
@@ -100,7 +103,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   style: ButtonStyle(
                     backgroundColor: WidgetStateProperty.all(BTNgreen), 
                     padding: WidgetStateProperty.all(const EdgeInsets.all(12)), 
-                    shape: WidgetStateProperty.all( // CORRIGÉ
+                    shape: WidgetStateProperty.all( 
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),

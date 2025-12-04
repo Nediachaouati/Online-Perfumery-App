@@ -9,6 +9,7 @@ class Checkout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Récupère Cart via Provider
     final carttt = Provider.of<Cart>(context);
 
     return Scaffold(
@@ -29,9 +30,9 @@ class Checkout extends StatelessWidget {
                   )
                 : ListView.builder(
                     padding: const EdgeInsets.all(12),
-                    itemCount: carttt.selectedProducts.length,
+                    itemCount: carttt.selectedProducts.length,//nb d'article
                     itemBuilder: (context, index) {
-                      final item = carttt.selectedProducts[index];
+                      final item = carttt.selectedProducts[index];//prd actuel
                       return Card(
                         margin: const EdgeInsets.symmetric(vertical: 8),
                         elevation: 4,
@@ -61,7 +62,7 @@ class Checkout extends StatelessWidget {
                             ),
                           ),
                           trailing: IconButton(
-                            onPressed: () => carttt.delete(item),
+                            onPressed: () => carttt.delete(item),// Supprime cart
                             icon: const Icon(
                               Icons.remove_circle,
                               color: Colors.red,
@@ -73,14 +74,14 @@ class Checkout extends StatelessWidget {
                   ),
           ),
 
-          // BOUTON PAIEMENT
+          // btn pay
           Padding(
             padding: const EdgeInsets.all(20),
             child: SizedBox(
               width: 200,
               height: 50,
               child: ElevatedButton(
-                onPressed: carttt.selectedProducts.isEmpty
+                onPressed: carttt.selectedProducts.isEmpty //desactivé panier vide
                     ? null
                     : () {
                         ScaffoldMessenger.of(context).showSnackBar(

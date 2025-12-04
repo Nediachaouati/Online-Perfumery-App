@@ -36,7 +36,7 @@ class _LoginState extends State<Login> {
       showSnackBar(context, "ERROR : ${e.code}");
     }
 
-    setState(() {
+    setState(() { //ok rediriger vers home
       isLoading = false;
     });
   }
@@ -178,16 +178,17 @@ class _LoginState extends State<Login> {
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 27),
+                  //cnx google
                   child: GestureDetector(
                     onTap: () async {
                       final googleSignInProvider =
                           Provider.of<GoogleSignInProvider>(
                             context,
                             listen: false,
-                          ); // listen: false pour éviter rebuild infini
+                          ); 
                       await googleSignInProvider
-                          .googleLogin(); // Nom corrigé (camelCase)
-                      // Redirection optionnelle si connecté
+                          .googleLogin(); 
+                      
                       if (FirebaseAuth.instance.currentUser != null) {
                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => Home()));
                         showSnackBar(context, "Connecté avec Google !");

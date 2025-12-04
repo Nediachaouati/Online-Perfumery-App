@@ -25,12 +25,12 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
 
     if (!isEmailVerified) {
       sendVerificationEmail();
-
+      // Vérifie toutes les 3s si l’email est vérifié
       timer = Timer.periodic(const Duration(seconds: 3), (timer) async {
-        // when we click on the link that existed on yahoo
+        
         await FirebaseAuth.instance.currentUser!.reload();
 
-        // is email verified or not (clicked on the link or not) (true or false)
+       // L'adresse e-mail est-elle vérifiée ou non
         setState(() {
           isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
         });

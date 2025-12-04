@@ -14,8 +14,8 @@ class _ImgUserState extends State<ImgUser> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<DocumentSnapshot>(
-      future: FirebaseFirestore.instance.collection('users').doc(credential!.uid).get(),
-      builder: (context, snapshot) {
+      future: FirebaseFirestore.instance.collection('users').doc(credential!.uid).get(), //chercher user data
+      builder: (context, snapshot) { // avatar par défaut
         if (snapshot.hasError || !snapshot.hasData || !snapshot.data!.exists) {
           return const CircleAvatar(
             radius: 71,
@@ -24,6 +24,7 @@ class _ImgUserState extends State<ImgUser> {
           );
         }
 
+        // récupère le chemin de l’image sauvegardée dans Firestore
         final data = snapshot.data!.data() as Map<String, dynamic>;
         final imgPath = data["imgLink"] ?? "assets/img/avatar1.png";
 

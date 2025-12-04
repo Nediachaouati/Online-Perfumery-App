@@ -52,7 +52,7 @@ class _RegisterState extends State<Register> {
 
     setState(() => isLoading = true);
 
-    try {
+    try { // Créer compte Firebase
       final credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
             email: emailController.text.trim(),
@@ -71,7 +71,7 @@ class _RegisterState extends State<Register> {
             "email": emailController.text,
           });
 
-      // ENVOYER L'EMAIL DE VÉRIFICATION
+      // envoyer email de veryf
       await credential.user!.sendEmailVerification();
 
       if (!mounted) return;
@@ -116,7 +116,7 @@ class _RegisterState extends State<Register> {
               key: _formKey,
               child: Column(
                 children: [
-                  // --- AVATAR ---
+                  
                   Container(
                     padding: const EdgeInsets.all(5),
                     decoration: const BoxDecoration(
@@ -179,7 +179,7 @@ class _RegisterState extends State<Register> {
                   ),
                   const SizedBox(height: 33),
 
-                  // --- FORM ---
+                  // form
                   _buildTextField(usernameController, "Username", Icons.person),
                   const SizedBox(height: 22),
                   _buildTextField(
@@ -218,7 +218,7 @@ class _RegisterState extends State<Register> {
                   ),
                   const SizedBox(height: 15),
 
-                  // --- PASSWORD CHECKS ---
+                  // pass check 
                   _buildCheck("8+ chars", isPassword8Char),
                   _buildCheck("1 number", isPasswordHas1Number),
                   _buildCheck("Uppercase", hasUppercase),
@@ -226,7 +226,7 @@ class _RegisterState extends State<Register> {
                   _buildCheck("Special char", hasSpecialCharacters),
                   const SizedBox(height: 33),
 
-                  // --- REGISTER BUTTON ---
+                 
                   ElevatedButton(
                     onPressed: register,
                     child: isLoading

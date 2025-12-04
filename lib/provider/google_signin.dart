@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleSignInProvider with ChangeNotifier {
+  // Stocke l'utilisateur Google connecté
   GoogleSignInAccount? _user;
   GoogleSignInAccount? get user => _user;
 
+  //cnx google
   Future<void> googleLogin() async {
     try {
       
@@ -24,6 +26,7 @@ class GoogleSignInProvider with ChangeNotifier {
       if (idToken == null) throw "No ID token";
 
       final credential = GoogleAuthProvider.credential(idToken: idToken);
+      // Connecte l'utilisateur à Firebase
       await FirebaseAuth.instance.signInWithCredential(credential);
 
       notifyListeners();

@@ -33,7 +33,7 @@ class _DetailsState extends State<Details> {
           SingleChildScrollView(
             child: Column(
               children: [
-                Center(
+                Center( //animation
                   child: Padding(
                     padding: const EdgeInsets.only(top: 16, bottom: 8),
                     child: Hero(
@@ -115,7 +115,7 @@ class _DetailsState extends State<Details> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
-                    widget.product.description, // ← DESCRIPTION RÉELLE DE L’API
+                    widget.product.description, 
                     style: const TextStyle(fontSize: 16, height: 1.6),
                     maxLines: isShowMore ? 4 : null,
                     overflow: isShowMore ? TextOverflow.ellipsis : null,
@@ -132,6 +132,7 @@ class _DetailsState extends State<Details> {
               ],
             ),
           ),
+          // Lottie Animation
           if (showSuccess)
             Center(
               child: Lottie.asset(

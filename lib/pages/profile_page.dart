@@ -11,22 +11,23 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  // Récupère user connecté
   final user = FirebaseAuth.instance.currentUser;
 
-  // Contrôleurs pour les dialogues
+
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
 
   @override
-  void dispose() {
+  void dispose() {//nettoyage
     _nameController.dispose();
     _emailController.dispose();
     _ageController.dispose();
     super.dispose();
   }
 
-  // --- DIALOGUE D'ÉDITION ---
+ 
   void _showEditDialog({
     required String title,
     required String currentValue,
@@ -58,7 +59,7 @@ class _ProfilePageState extends State<ProfilePage> {
               if (controller.text.trim().isEmpty) return;
 
               try {
-                await FirebaseFirestore.instance
+                await FirebaseFirestore.instance //update dans Firestore
                     .collection('users')
                     .doc(user!.uid)
                     .update({field: controller.text.trim()});
@@ -106,11 +107,12 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ],
       ),
+      // donnes reel depuis firestore
       body: StreamBuilder<DocumentSnapshot>(
         stream: FirebaseFirestore.instance
             .collection('users')
             .doc(user!.uid)
-            .snapshots(),
+            .snapshots(), // Met à jour automatiquement si les données changent
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
@@ -127,7 +129,7 @@ class _ProfilePageState extends State<ProfilePage> {
               padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
-                  // --- AVATAR ---
+                  // AVATAR
                   Stack(
                     children: [
                       CircleAvatar(
@@ -159,7 +161,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   const SizedBox(height: 40),
 
-                  // --- CARTE INFO ---
+                  //CARTE INFO 
                   Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -222,7 +224,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  // --- LIGNE MODIFIABLE ---
+  // ligne modifiable
   Widget _buildEditableRow({
     required IconData icon,
     required String label,
@@ -256,7 +258,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  // --- GRILLE D'AVATARS ---
+  // grille avatar 
   Widget _buildAvatarGrid() {
     final avatars = [
       "avatar1.png",

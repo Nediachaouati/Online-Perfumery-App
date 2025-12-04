@@ -1,7 +1,7 @@
 import 'package:ecommerceapp/model/item.dart';
 import 'package:flutter/material.dart';
 
-class Cart with ChangeNotifier {
+class Cart with ChangeNotifier { //notifier auto interface quand panier change
   List selectedProducts = [];
   int price = 0;
 
